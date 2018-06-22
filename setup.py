@@ -23,7 +23,7 @@ setup(
 
     author='',
     author_email='',
-    url='https://github.com/openprocurement/openprocurement.client.python',
+    url='https://github.com/ProzorroUKR/openprocurement.client.python',
     license='Apache Software License 2.0',
 
     packages=find_packages(exclude=['ez_setup']),

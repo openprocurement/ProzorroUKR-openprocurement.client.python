@@ -1,12 +1,12 @@
+.. image:: https://travis-ci.org/ProzorroUKR/openprocurement.client.python.svg?branch=master
+    :target: https://travis-ci.org/ProzorroUKR/openprocurement.client.python
+
+.. image:: https://coveralls.io/repos/github/ProzorroUKR/openprocurement.client.python/badge.svg?branch=master
+    :target: https://coveralls.io/github/ProzorroUKR/openprocurement.client.python?branch=master
+
+
 openprocurement.client.python
 =============================
-
-|Build Status| |Coverage Status|
-
-.. |Build Status| image:: https://travis-ci.org/openprocurement/openprocurement.client.python.svg?branch=master
-   :target: https://travis-ci.org/openprocurement/openprocurement.client.python
-.. |Coverage Status| image:: https://coveralls.io/repos/openprocurement/openprocurement.client.python/badge.svg?branch=master&service=github
-   :target: https://coveralls.io/github/openprocurement/openprocurement.client.python?branch=master
 
 
 **openprocurement.client.python** is a wrapper for openprocurement API, one of the main components of *OpenProcurement*, an open source software toolkit, powering *ProZorro, ProZorro.sale, Rialto, MTender* e-procurement systems. 
