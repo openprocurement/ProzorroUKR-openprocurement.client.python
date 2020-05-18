@@ -783,6 +783,22 @@ class UserTestCase(BaseTestClass):
                 access_token=self.tender.access['token']
             )
 
+    def test_upload_tender_document_with_doc_data(self):
+        setup_routing(self.app, routes=["tender_document_create"])
+        file_ = StringIO()
+        file_.name = 'test_document.txt'
+        file_.write("test upload tender document text data")
+        file_.seek(0)
+
+        doc = self.client.upload_document(
+            file_, self.tender,
+            doc_type='tenderNotice',
+            additional_doc_data={'documentOf': 'documents', 'relatedItem': '1'},
+
+        )
+        self.assertEqual(doc.data.title, file_.name)
+        self.assertEqual(doc.data.id, TEST_TENDER_KEYS.new_document_id)
+
     def test_upload_qualification_document(self):
         setup_routing(self.app, routes=["tender_subpage_document_create"])
         file_ = StringIO()
