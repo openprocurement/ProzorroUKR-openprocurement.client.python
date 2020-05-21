@@ -371,7 +371,7 @@ class APIResourceClient(APIBaseClient):
 
     @verify_file
     def update_document(self, file_, resource_item_id, document_id, subitem_name=DOCUMENTS, doc_type=None, use_ds_client=True,
-                        doc_registration=True, depth_path=None, access_token=None):
+                        doc_registration=True, depth_path=None, access_token=None, additional_doc_data=None):
         headers = None
         if access_token:
             headers = {'X-Access-Token': access_token}
@@ -385,7 +385,7 @@ class APIResourceClient(APIBaseClient):
             url = '{}/{}/{}/{}'.format(self.prefix_path, resource_item_id, subitem_name, document_id)
         return self._upload_resource_file(url,
                                           file_=file_, headers=headers, method='PUT', use_ds_client=use_ds_client,
-                                          doc_registration=doc_registration, doc_type=doc_type)
+                                          doc_registration=doc_registration, doc_type=doc_type, additional_doc_data=additional_doc_data)
 
     ###########################################################################
     #                          UPLOAD CLIENT METHODS

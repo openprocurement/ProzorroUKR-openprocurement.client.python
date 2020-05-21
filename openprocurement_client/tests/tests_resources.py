@@ -922,6 +922,21 @@ class UserTestCase(BaseTestClass):
         )
         self.assertEqual(doc.data.title, file_.name)
 
+    def test_update_tender_document_with_additional_doc_data(self):
+        setup_routing(self.app, routes=["tender_document_update"])
+        file_ = StringIO()
+        file_.name = 'test_document.txt'
+        file_.write("test upload tender document text data")
+        file_.seek(0)
+        doc_data = {'documentOf': 'documents', 'relatedItem': '1'},
+        doc = self.client.update_document(
+            file_, self.limited_tender,
+            TEST_TENDER_KEYS_LIMITED.document_id,
+            doc_type='tenderNotice',
+            additional_doc_data=doc_data
+        )
+        self.assertEqual(doc.data.title, file_.name)
+
     def test_update_bid_document(self):
         setup_routing(self.app, routes=["tender_subpage_document_update"])
         file_ = StringIO()
