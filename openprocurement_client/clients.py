@@ -141,7 +141,7 @@ class APIBaseClient(APITemplateClient):
 
     @verify_file
     def upload_document(self, file_, resource_item_id, subitem_name=DOCUMENTS, doc_type=None, use_ds_client=True,
-                        doc_registration=True, depth_path=None, access_token=None):
+                        doc_registration=True, depth_path=None, access_token=None, additional_doc_data=None):
         headers = None
         if access_token:
             headers = {'X-Access-Token': access_token}
@@ -154,7 +154,7 @@ class APIBaseClient(APITemplateClient):
             url = '{}/{}/{}'.format(self.prefix_path, resource_item_id, subitem_name)
         return self._upload_resource_file(url,
                                           file_=file_, headers=headers, doc_registration=doc_registration,
-                                          doc_type=doc_type, use_ds_client=use_ds_client)
+                                          doc_type=doc_type, use_ds_client=use_ds_client, additional_doc_data=additional_doc_data)
 
     def _update_params(self, params):
         for key in params:
@@ -162,7 +162,7 @@ class APIBaseClient(APITemplateClient):
                 self.params[key] = params[key]
 
     def _upload_resource_file(self, url, file_=None, headers=None, doc_type=None, method='POST',
-                              use_ds_client=True, doc_registration=True):
+                              use_ds_client=True, doc_registration=True, additional_doc_data=None):
         if hasattr(self, 'ds_client') and use_ds_client:
             if doc_registration:
                 response = self.ds_client.document_upload_registered(file_=file_, headers=headers)
@@ -171,6 +171,8 @@ class APIBaseClient(APITemplateClient):
             payload = {'data': response['data']}
             if doc_type:
                 payload['data']['documentType'] = doc_type
+            if additional_doc_data:
+               payload['data'].update(additional_doc_data)
             response = self._create_resource_item(url, headers=headers, payload=payload, method=method)
         else:
             if use_ds_client:
@@ -417,7 +419,7 @@ class APIResourceClient(APIBaseClient):
 
     @verify_file
     def update_document(self, file_, resource_item_id, document_id, subitem_name=DOCUMENTS, doc_type=None, use_ds_client=True,
-                        doc_registration=True, depth_path=None, access_token=None):
+                        doc_registration=True, depth_path=None, access_token=None, additional_doc_data=None):
         headers = None
         if access_token:
             headers = {'X-Access-Token': access_token}
@@ -431,7 +433,7 @@ class APIResourceClient(APIBaseClient):
             url = '{}/{}/{}/{}'.format(self.prefix_path, resource_item_id, subitem_name, document_id)
         return self._upload_resource_file(url,
                                           file_=file_, headers=headers, method='PUT', use_ds_client=use_ds_client,
-                                          doc_registration=doc_registration, doc_type=doc_type)
+                                          doc_registration=doc_registration, doc_type=doc_type, additional_doc_data=additional_doc_data)
 
     ###########################################################################
     #                          UPLOAD CLIENT METHODS
