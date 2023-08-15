@@ -431,6 +431,7 @@ class TendersClient(APIResourceClient):
                                     doc_registration=doc_registration,
                                     depth_path=depth_path, access_token=access_token)
 
+    @retry(stop_max_attempt_number=5)
     def upload_bid_document(self, file_, tender_id, bid_id, doc_type=None, use_ds_client=True,
                             doc_registration=True, access_token=None, subitem_name=DOCUMENTS):
         depth_path = '{}/{}'.format(BIDS, bid_id)
