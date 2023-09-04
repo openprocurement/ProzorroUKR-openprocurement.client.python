@@ -9,6 +9,8 @@ from openprocurement_client.constants import (
    AGREEMENTS,
    CHANGES,
    DOCUMENTS,
+   CONTRACTS,
+   MILESTONES
 )
 
 munchify = munchify_factory()
@@ -62,3 +64,31 @@ class AgreementClient(APIResourceClient):
 
             pos = classification_id[1:].find('0')
             classification_id = classification_id[:pos] + '0' + classification_id[pos+1:]
+
+
+    def upload_document_in_milestone(self, file, agreement_id, contract_id, milestone_id, use_ds_client=True,
+                                     doc_registration=True, access_token=None):
+        depth_path = '{}/{}/{}/{}'.format(CONTRACTS, contract_id, MILESTONES, milestone_id)
+        self.upload_document
+        return self.upload_document(file, agreement_id,
+                                    use_ds_client=use_ds_client,
+                                    doc_registration=doc_registration,
+                                    depth_path=depth_path,
+                                    access_token=access_token)
+
+    def ban_contract(self, agreement_id, contract_id, data, access_token=None):
+        depth_path = '{}/{}'.format(CONTRACTS, contract_id)
+        return self.create_resource_item_subitem(
+            agreement_id, data, MILESTONES,
+            depth_path=depth_path, access_token=access_token)
+
+
+    def disqualify_contract(self, agreement_id, contract_id, milestone_id, data, access_token=None):
+        depth_path = '{}/{}'.format(CONTRACTS, contract_id)
+        return self.patch_resource_item_subitem(
+            agreement_id, data, MILESTONES, milestone_id,
+            depth_path=depth_path,
+            access_token=access_token)
+
+
+
