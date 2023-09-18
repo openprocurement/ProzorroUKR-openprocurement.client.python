@@ -65,7 +65,7 @@ class FrameworksClient(APIResourceClient):
                                     doc_registration=doc_registration,
                                     access_token=access_token)
 
-    def upload_framework_document(self, file_, framework_id, document_id, use_ds_client=True,
+    def update_framework_document(self, file_, framework_id, document_id, use_ds_client=True,
                                 doc_registration=True, access_token=None):
         return self.update_document(file_, framework_id, document_id,
                                     use_ds_client=use_ds_client,
