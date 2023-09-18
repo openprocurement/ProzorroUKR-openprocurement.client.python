@@ -60,3 +60,9 @@ class FrameworksClient(APIResourceClient):
                                     use_ds_client=use_ds_client,
                                     doc_registration=doc_registration,
                                     access_token=access_token)
+
+    def upload_auction_document(self, file_, framework_id, document_id, use_ds_client=True,
+                                doc_registration=True, access_token=None):
+        return self.update_document(file_, framework_id, document_id,
+                                    use_ds_client=use_ds_client,
+                                    doc_registration=doc_registration, access_token=access_token)
