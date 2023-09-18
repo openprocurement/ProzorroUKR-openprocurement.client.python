@@ -39,6 +39,10 @@ class FrameworksClient(APIResourceClient):
     def get_documents(self, framework_id, access_token=None):
         return self.get_resource_item_subitem(framework_id, DOCUMENTS, access_token=access_token)
 
+    def get_documents(self, framework_id, document_id, access_token=None):
+        return self.get_resource_item_subitem(
+            framework_id, document_id, depth_path='{}'.format(DOCUMENTS), access_token=access_token)
+
     def get_submissions(self, framework_id, access_token=None):
         return self.get_resource_item_subitem(framework_id, SUBMISSIONS, access_token=access_token)
 
