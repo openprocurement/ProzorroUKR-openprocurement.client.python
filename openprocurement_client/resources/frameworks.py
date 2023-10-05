@@ -58,6 +58,12 @@ class FrameworksClient(APIResourceClient):
     ###########################################################################
     #             UPLOAD FILE API METHODS
     ###########################################################################
+
+    def updated_registered_document(self, framework_id, document_data, access_token=None):
+        return self.create_resource_item_subitem(
+            framework_id, document_data, DOCUMENTS, access_token=access_token
+        )
+
     def upload_framework_document(self, file, framework_id, use_ds_client=True,
                               doc_registration=True, access_token=None):
         return self.upload_document(file, framework_id,
