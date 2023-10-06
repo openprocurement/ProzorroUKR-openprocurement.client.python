@@ -63,7 +63,7 @@ class FrameworksClient(APIResourceClient):
             headers = {'X-Access-Token': self._get_access_token(resource_item_id)}
             resource_item_id = resource_item_id['data']['id']
         url = '{}/{}/{}/{}'.format(self.prefix_path, resource_item_id,
-                                       document_id, DOCUMENTS)
+                                       DOCUMENTS, document_id)
         return self._create_resource_item(url, subitem_obj, headers=headers, method='PUT')
 
     ###########################################################################
