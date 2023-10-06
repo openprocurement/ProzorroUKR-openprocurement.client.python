@@ -55,6 +55,17 @@ class FrameworksClient(APIResourceClient):
     def patch_framework(self, framework_id, patch_data={}, access_token=None):
         return self.patch_resource_item(framework_id, patch_data, access_token=access_token)
 
+    def put_document(self, resource_item_id, subitem_obj, document_id, access_token=None):
+        headers = None
+        if access_token:
+            headers = {'X-Access-Token': access_token}
+        if isinstance(resource_item_id, dict):
+            headers = {'X-Access-Token': self._get_access_token(resource_item_id)}
+            resource_item_id = resource_item_id['data']['id']
+        url = '{}/{}/{}/{}'.format(self.prefix_path, resource_item_id,
+                                       document_id, DOCUMENTS)
+        return self._create_resource_item(url, subitem_obj, headers=headers, method='PUT')
+
     ###########################################################################
     #             UPLOAD FILE API METHODS
     ###########################################################################
