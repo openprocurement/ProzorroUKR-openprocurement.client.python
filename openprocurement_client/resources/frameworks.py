@@ -66,6 +66,11 @@ class FrameworksClient(APIResourceClient):
                                        DOCUMENTS, document_id)
         return self._create_resource_item(url, subitem_obj, headers=headers, method='PUT')
 
+    def patch_document(self, framework_id, data, document_id, access_token=None):
+        return self.patch_resource_item_subitem(
+            framework_id, data, DOCUMENTS, document_id, access_token=access_token)
+
+
     ###########################################################################
     #             UPLOAD FILE API METHODS
     ###########################################################################
