@@ -27,6 +27,11 @@ class SubmissionsClient(APIResourceClient):
                                     doc_registration=doc_registration,
                                     access_token=access_token)
 
+    def post_registered_submission_document(self, submission_id, document_data, access_token=None):
+        return self.create_resource_item_subitem(
+            submission_id, document_data, DOCUMENTS, access_token=access_token
+        )
+
     def patch_submission_document(self, submission_id, document_data, document_id,
                        access_token=None, depth_path=None):
         return self.patch_resource_item_subitem(
