@@ -51,3 +51,8 @@ class SubmissionsClient(APIResourceClient):
         return self._create_resource_item(url, subitem_obj, headers=headers, method='PUT')
 
 
+    def get_submission_document(self, submission_id, document_id, access_token=None):
+        return self.get_resource_item_subitem(
+            submission_id, document_id, depth_path='{}'.format(DOCUMENTS), access_token=access_token)
+
+
