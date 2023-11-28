@@ -42,7 +42,7 @@ class ContractingClient(APIResourceClient):
         return self.patch_resource_item(contract_id, data, access_token)
 
     def patch_contracts(self, contract_id, access_token, data):
-        return self.patch_resource_item_subitem(contract_id, data, CREDENTIALS, access_token)
+        return self.patch_resource_item_subitem(contract_id, data, CREDENTIALS, access_token=access_token)
 
     def patch_change(self, contract_id, change_id, access_token, data):
         return self.patch_resource_item_subitem(contract_id, data, CHANGES, change_id, access_token=access_token)
