@@ -41,8 +41,11 @@ class ContractingClient(APIResourceClient):
     def patch_contract(self, contract_id, access_token, data):
         return self.patch_resource_item(contract_id, data, access_token)
 
-    def patch_contracts(self, contract_id, access_token, data):
-        return self.patch_resource_item_subitem(contract_id, data, CREDENTIALS, access_token=access_token)
+    def patch_contracts(self, contract_id, access_token, patch_data={}):
+        headers = {'X-Access-Token': access_token}
+        url = '{}/{}/{}'.format(
+            self.prefix_path, contract_id, CREDENTIALS)
+        return self._patch_resource_item(url, patch_data, headers=headers)
 
     def patch_change(self, contract_id, change_id, access_token, data):
         return self.patch_resource_item_subitem(contract_id, data, CHANGES, change_id, access_token=access_token)
